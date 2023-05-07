@@ -19,6 +19,7 @@
  */
 
 const HDWalletProvider = require("@truffle/hdwallet-provider")
+const Web3 = require('web3');
 require("dotenv").config()
 
 const privateKeys = [process.env.PRIVATE_KEY]
@@ -39,6 +40,14 @@ module.exports = {
    */
 
   networks: {
+    development: {
+      provider: () => {
+        return new Web3.providers.HttpProvider('https://u0es54fcxc:OH32l4zWimKJBrOgVkbyBqntEL-zs5MK2DYWM57CQcw@u0znvfuur3-u0ju5j5821-rpc.us0-aws.kaleido.io/', 100000);
+      },
+      network_id: "*",       // Any network (default: none)
+      gasPrice: 0,
+      gas: 4500000,
+    },
     // There is a hidden "test" network that gets called when you run `truffle test`
     ganache: {
       provider: () => new HDWalletProvider(ganachePrivateKeys, "http://127.0.0.1:8545"),
